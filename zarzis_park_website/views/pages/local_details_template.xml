@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="local_details_template" name="Local Details">
+        <t t-call="website.layout">
+            <div class="oe_structure patient_details_class" style="overflow: hidden;">
+                <div class="container">
+                    <br/>
+                    <div style="display: flex; justify-content: space-around;margin: 5% 0;">
+                        <div>
+                            <p>
+                                <strong>Reference:</strong>
+                                <span>
+                                    <t t-esc="local.reference"/>
+                                </span>
+                            </p>
+                            <p>
+                                <strong>Name:</strong>
+                                <span>
+                                    <t t-esc="local.name"/>
+                                </span>
+                            </p>
+                            <p>
+                                <strong>Area Size:</strong>
+                                <span>
+                                    <t t-esc="local.area_size"/>
+                                </span>
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                <strong>Price Per Metre:</strong>
+                                <span>
+                                    <t t-esc="local.price_per_metre"/>
+                                </span>
+                            </p>
+                            <p>
+                                <strong>Currency:</strong>
+                                <span>
+                                    <t t-esc="local.currency_id.name"/>
+                                </span>
+                            </p>
+                            <p>
+                                <strong>Total Price:</strong>
+                                <span>
+                                    <t t-esc="local.total_price"/>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff; height: 700px"
+                         class="swiper mySwiper2">
+                        <div class="swiper-wrapper">
+                            <t t-foreach="local.attachment_ids" t-as="att">
+                                <div class="swiper-slide">
+                                    <img t-attf-src="/web/content/#{att.id}"/>
+                                </div>
+                            </t>
+                        </div>
+                        <div class="swiper-button-next"/>
+                        <div class="swiper-button-prev"/>
+                    </div>
+                    <div thumbsSlider="" class="swiper mySwiper" style="height: 200px; width: 100%;">
+                        <div class="swiper-wrapper">
+                            <t t-foreach="local.attachment_ids" t-as="att">
+                                <div class="swiper-slide">
+                                    <img t-attf-src="/web/content/#{att.id}"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div style="display: flex;position: relative;margin: 5% 0;justify-content: flex-end;">
+                        <a class="add" t-attf-href="/local/list"
+                           style="margin-left: 0%;"> <i class="fa fa-arrow-circle-left"/> Previous Page
+                        </a>
+                        <a class="add" t-attf-href="/local/list/{{local.id}}/rental_form"
+                           style="margin-left: 1%;" t-if="local.state == 'not_reserved'">Rent
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script>
+            <script src='http://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText.min.js'></script>
+        </t>
+    </template>
+    <template id="footer_custom" inherit_id="zarzis_park_website.my_footer"/>
+</odoo>

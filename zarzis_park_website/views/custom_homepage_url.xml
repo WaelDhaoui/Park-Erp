@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="zarzis_park_website_auth_signup_fields" inherit_id="auth_signup.fields" name="My Module Auth Signup/ResetPassword form fields">
+        <xpath expr="//div[@class='mb-3 field-login']/input[@name='login']" position="attributes">
+            <attribute name="type">email</attribute>
+        </xpath>
+    </template>
+</odoo>

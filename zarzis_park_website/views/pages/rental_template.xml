@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="rental_template" name="Request rental">
+        <t t-call="website.layout">
+            <div class="oe_structure rental_template">
+                <div class="container">
+                    <form action="" method="post" id="rental">
+                        <div>
+                            <p>NAME OF COMPANY TO BE CREATED</p>
+                            <div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="promoter_name">Promoter Name &amp; Surname</label>
+                                         <input required="required" type="text" name="promoter_name" class="form-control"
+                                               id="promoter_name" t-att-value="user_name"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="nationality_promoter">Activity Country
+                                        </label>
+                                        <select name="nationality_promoter" class="form-control o_required_input" required="required">
+                                            <option value="">Country...</option>
+                                            <t t-foreach="country_ids" t-as="country">
+                                                <option t-att-value="country.name">
+                                                    <t t-esc="country.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                         <input required="required" type="text" name="address" class="form-control" id="address"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Tel">Tel</label>
+                                         <input required="required" type="tel" name="phone" class="form-control" id="Tel"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="E-mail">E-mail</label>
+                                         <input required="required" type="email" name="email" class="form-control" id="E-mail" t-att-value="user_email"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="1st_proposal">Name of company to be created: 1st Proposal</label>
+                                         <input required="required" type="text" name="1st_proposal" class="form-control" id="1st_proposal"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="2nd_proposal">2nd Proposal</label>
+                                         <input required="required" type="text" name="2nd_proposal" class="form-control" id="2nd_proposal"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="3rd_proposal">3rd Proposal</label>
+                                         <input required="required" type="text" name="3rd_proposal" class="form-control" id="3rd_proposal"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="activities">Activities</label>
+                                         <input required="required" type="text" name="activities" class="form-control" id="activities"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="surname_manager">Name &amp; surname of the manager</label>
+                                         <input required="required" type="text" name="surname_manager" class="form-control"
+                                               id="surname_manager"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="nationality_manager">Activity Country</label>
+                                        <select name="nationality_manager" class="form-control o_required_input" required="required">
+                                            <option value="">Country...</option>
+                                            <t t-foreach="country_ids" t-as="country">
+                                                <option t-att-value="country.name">
+                                                    <t t-esc="country.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="currency">Currency</label>
+                                        <select name="currency" class="form-control o_required_input" required="required">
+                                            <option value="">Currency...</option>
+                                            <t t-foreach="currency_ids" t-as="c">
+                                                <option t-att-value="c.name">
+                                                    <t t-esc="c.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="capital_company">Capital of the company to be created (EURO / US $ /
+                                            TND):
+                                        </label>
+                                         <input required="required" type="number" name="capital_company" class="form-control"
+                                               id="capital_company"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>MAIN SHAREHOLDERS (PRECISE RESIDENT / NON-RESIDENT)</p>
+                            <div class="table">
+                                <table>
+                                    <thead>
+                                        <th>Name &amp; Surname</th>
+                                        <th>Activity Country</th>
+                                        <th>% of subscription</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" name="shareholders" class="form-control"
+                                                       id="name_surname" required="required"/>
+                                            </td>
+                                            <td>
+                                                <select name="shareholders" class="form-control o_required_input" required="required">
+                                                    <option value="">Country...</option>
+                                                    <t t-foreach="country_ids" t-as="country">
+                                                        <option t-att-value="country.name">
+                                                            <t t-esc="country.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="shareholders" class="form-control"
+                                                       id="subscription" required="required"/>
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-2x fa-times-circle text-danger"
+                                                   style="cursor: pointer"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id="add" style="width: 97%;display: flex; justify-content: flex-end; border-top: none">
+                                    <button class="btn btn-primary">Add Line</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div >
+                            <p>CONSTRUCTION NATURE</p>
+                            <div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="req">Requirements (in Sq m):</label>
+                                        <select disabled="1" name="req" class="form-control" id="req" required="required">
+                                            <option t-att-value="local_id.type_local" selected="1">
+                                                <t t-esc="local_id.type_local" />
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div t-if="local_id.type_local == 'land'">
+                                    <div class="form-group">
+                                        <label for="construction_area">Construction area (in Sq m):</label>
+                                         <input required="required" type="number" name="construction_area" class="form-control"
+                                               id="construction_area"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div t-if="local_id.type_local == 'land'">
+                            <p>NUMBER OF NATIONAL JOBS TO BE CREATED</p>
+                            <div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="construction_nature">Construction nature:</label>
+                                        <select id="construction_nature" name="construction_nature"
+                                                class="form-control" required="required">
+                                            <option value="permanent">Permanent</option>
+                                            <option value="temporary">Temporary</option>
+                                            <option value="mixed">Mixed</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea class="form-control" name="description" id="description"
+                                                  rows="3" required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>INVESTMENT &amp; FINANCING PROGRAM (EURO / US $ / TND)</p>
+                            <div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="estimated">Estimated export value (in EURO / US$ / TND)</label>
+                                         <input required="required" type="text" name="estimated" class="form-control" id="estimated"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="local_added_value">Local added value (Tunisian goods and
+                                            services):
+                                        </label>
+                                         <input required="required" type="text" name="local_added_value" class="form-control"
+                                               id="local_added_value"/>
+                                    </div>
+                                    <div class="form-group years_width_small_screen">
+                                        <label for="year_one">Number of national jobs to be created:</label>
+                                        <div class="nb_nat_jobs">
+                                            <label for="year_one">Year 1:</label>
+                                             <input required="required" type="number" name="year_one" class="form-control" id="year_one"/>
+                                            <label for="year_two">Year 2:</label>
+                                             <input required="required" type="number" name="year_two" class="form-control" id="year_two"/>
+                                            <label for="year_three">Year 3:</label>
+                                             <input required="required" type="number" name="year_three" class="form-control"
+                                                   id="year_three"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="export_destination">Export destination (manufactured goods or
+                                            merchandises):
+                                        </label>
+                                        <td>
+                                            <select name="export_destination" class="form-control o_required_input" required="required">
+                                                <option value="">Country...</option>
+                                                <t t-foreach="country_ids" t-as="country">
+                                                    <option t-att-value="country.name">
+                                                        <t t-esc="country.name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </td>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="origin">Origin of imported goods (raw materials or merchandises):
+                                        </label>
+                                         <input required="required" type="text" name="origin" class="form-control" id="origin"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div class="investment_container">
+                                    <p>INVESTMENT</p>
+                                    <div class="form-group">
+                                        <label for="construction_equipments">Construction &amp; Equipments</label>
+                                         <input required="required" type="number" name="construction_equipments" class="form-control"
+                                               id="construction_equipments"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="imported_equipments">Imported equipments</label>
+                                         <input required="required" type="number" name="imported_equipments" class="form-control"
+                                               id="imported_equipments"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="local_equipments">Local equipments</label>
+                                         <input required="required" type="number" name="local_equipments" class="form-control"
+                                               id="local_equipments"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="means_transport">Means of transport</label>
+                                         <input required="required" type="number" name="means_transport" class="form-control"
+                                               id="means_transport"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="other_costs">Other costs</label>
+                                         <input required="required" type="number" name="other_costs" class="form-control" id="other_costs"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="working_capital">Working capital</label>
+                                         <input required="required" type="number" name="working_capital"
+                                                class="form-control" id="working_capital"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="total_investment">TOTAL</label>
+                                         <input required="required" type="number" name="total_investment"
+                                                class="form-control" id="total_investment" readonly="1"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>FINANCING</p>
+                                    <div class="form-group">
+                                        <label for="capital_finance">Capital</label>
+                                         <input required="required" type="number" name="capital_finance" class="form-control"
+                                               id="capital_finance" readonly="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="current_partners">Current account of partners</label>
+                                         <input required="required" type="number" name="current_partners" class="form-control"
+                                               id="current_partners"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="long_credit">Long term credit</label>
+                                         <input type="number" name="long_credit" class="form-control" id="long_credit" disabled="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="middle_credit">Middle term credit</label>
+                                         <input type="number" name="middle_credit" class="form-control"
+                                               id="middle_credit" disabled="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="short_credit">Short term credit</label>
+                                         <input type="number" name="short_credit" class="form-control" id="short_credit" disabled="1"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="total_financing">TOTAL</label>
+                                         <input required="required" type="number" name="total_financing" class="form-control"
+                                               id="total_financing" readonly="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button" style="text-align: right;margin-right: 3%;">
+                            <a class="add" t-attf-href="./" style="margin-left: 1%; display: inline-flex;">Discard</a>
+                            <input id="submit_form" type="submit" value="Submit"/>
+                        </div>
+                    </form>
+                    <p id="my_msg"
+                       style="text-align: center;font-size: 23px;background-color: #eee;padding: 2%; display: none;">
+                        your request has benn send successful
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

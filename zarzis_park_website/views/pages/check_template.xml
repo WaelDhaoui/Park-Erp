@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="request_menuitem" inherit_id="portal.user_dropdown">
+        <xpath expr="//div/div" position="after">
+            <a groups="base.group_user" href="/local/request" role="menuitem" class="dropdown-item ps-3"
+               id="my_request">
+                <i class="fa fa-fw fa-th me-1 small text-muted"/>
+                My requests
+            </a>
+            <div id="o_logout_divider" class="dropdown-divider"/>
+        </xpath>
+    </template>
+
+    <template id="check_template" name="Check Request">
+        <t t-call="website.layout">
+            <div class="oe_structure check_template">
+                <div class="container">
+                    <form action="" method="post" style="max-height: 400vh;">
+                        <t t-foreach="request_form" t-as="rental" t-if="rental">
+                            <div>
+                                <p>NAME OF COMPANY TO BE CREATED</p>
+                                <div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="Promoter_Name">Promoter Name &amp; Surname</label>
+                                            <input type="text" name="Promoter_Name" class="form-control"
+                                                   id="Promoter_Name" t-att-value="rental.name" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="Nationality_promoter">Activity Country
+                                            </label>
+                                            <select name="Nationality_promoter" class="form-control o_required_input"
+                                                    disabled="1">
+                                                <option t-att-value="rental.owner_national_id.name" selected="1">
+                                                    <t t-esc="rental.owner_national_id.name"/>
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Address">Address</label>
+                                            <input type="text" name="Address" class="form-control" id="Address"
+                                                   t-att-value="rental.address" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Tel">Tel</label>
+                                            <input type="tel" name="phone" class="form-control" id="Tel"
+                                                   t-att-value="rental.phone" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="E-mail">E-mail</label>
+                                            <input type="email" name="email" class="form-control" id="E-mail"
+                                                   t-att-value="rental.email" disabled="1"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="1st_Proposal">Name of company to be created: 1st Proposal
+                                            </label>
+                                            <input type="text" name="1st_Proposal" class="form-control"
+                                                   id="1st_Proposal" t-att-value="rental.first_proposal" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="2nd_Proposal">2nd Proposal</label>
+                                            <input type="text" name="2nd_Proposal" class="form-control"
+                                                   id="2nd_Proposal" t-att-value="rental.second_proposal" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="3rd Proposal">3rd Proposal</label>
+                                            <input type="text" name="3rd_Proposal" class="form-control"
+                                                   id="3rd_Proposal" t-att-value="rental.third_proposal" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="activities">Activities</label>
+                                            <input type="text" name="activities" class="form-control" id="activities"
+                                                   t-att-value="rental.activity" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="surname_manager">Name &amp; surname of the manager</label>
+                                            <input type="text" name="surname_manager" class="form-control"
+                                                   t-att-value="rental.name_surname_manager" disabled="1"
+                                                   id="surname_manager"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="nationality_manager">Activity Country
+                                            </label>
+                                            <select name="nationality_manager" class="form-control o_required_input"
+                                                    disabled="1">
+                                                <option value="rental.national2"
+                                                        t-att-selected="rental.company_national_id.name">
+                                                    <t t-esc="rental.company_national_id.name"/>
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="capital_company">Capital of the company to be created (EURO / US
+                                                $ / TND):
+                                            </label>
+                                            <input type="number" name="capital_company" class="form-control"
+                                                   t-att-value="rental.company_capital" disabled="1"
+                                                   id="capital_company"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Currency">Currency</label>
+                                            <input type="text" name="Currency" class="form-control" id="Currency"
+                                                   t-att-value="rental.currency_id.name" disabled="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p>MAIN SHAREHOLDERS (PRECISE RESIDENT / NON-RESIDENT)</p>
+                                <div class="table">
+                                    <table>
+                                        <thead>
+                                            <th>Name &amp; Surname</th>
+                                            <th>Activity Country</th>
+                                            <th>% of subscription</th>
+                                            <th style="display: none"></th>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="request_form.shareholders_ids" t-as="shareholder">
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="shareholders" class="form-control"
+                                                               id="name_surname" disabled="1"
+                                                               t-att-value="shareholder.name_surname"/>
+                                                    </td>
+                                                    <td>
+                                                        <select name="shareholders"
+                                                                class="form-control o_required_input" disabled="1">
+                                                            <option t-att-value="shareholder.nationality_shareholders"
+                                                                    t-att-selected="1">
+                                                                <t t-esc="shareholder.nationality_shareholders"/>
+                                                            </option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="shareholders" class="form-control"
+                                                               id="subscription"
+                                                               t-att-value="shareholder.subscription_percentage"
+                                                               disabled="1"/>
+                                                    </td>
+                                                    <td style="display: none">
+                                                        <i class="fa fa-2x fa-times-circle text-danger"
+                                                           style="cursor: pointer"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <p>CONSTRUCTION NATURE</p>
+                                <div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="req">Requirements (in Sq m):</label>
+                                            <select id="req" name="req" class="form-control" disabled="1">
+                                                <option value="rental.category" t-att-selected="rental.category">
+                                                    <t t-esc="rental.category"/>
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div t-if="local_id.type_local == 'land'">
+                                        <div class="form-group">
+                                            <label for="Construction_area">Construction area (in Sq m):</label>
+                                            <input type="number" name="Construction_area" class="form-control"
+                                                   t-att-value="rental.area_size" disabled="1"
+                                                   id="Construction_area"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div t-if="local_id.type_local == 'land'">
+                                <p>NUMBER OF NATIONAL JOBS TO BE CREATED</p>
+                                <div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="Construction_nature">Construction nature:</label>
+                                            <select id="Construction_nature" name="Construction_nature" disabled="1"
+                                                    class="form-control">
+                                                <option value="rental.construction_nature"
+                                                        t-att-selected="rental.construction_nature">
+                                                    <t t-esc="rental.construction_nature"/>
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <textarea class="form-control" name="description" id="description"
+                                                      t-esc="rental.description" disabled="1"
+                                                      rows="3"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p>INVESTMENT &amp; FINANCING PROGRAM (EURO / US $ / TND)</p>
+                                <div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="Estimated">Estimated export value (in EURO / US$ / TND)</label>
+                                            <input type="text" name="Estimated" class="form-control" id="Estimated"
+                                                   t-att-value="rental.estimated_export_value" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Local_added_value">Local added value (Tunisian goods and
+                                                services):
+                                            </label>
+                                            <input type="text" name="Local_added_value" class="form-control"
+                                                   t-att-value="rental.local_added_value" disabled="1"
+                                                   id="Local_added_value"/>
+                                        </div>
+                                        <div class="form-group years_width_small_screen">
+                                            <label for="year_one">Number of national jobs to be created:</label>
+                                            <div class="nb_nat_jobs">
+                                                <label for="year_one">Year 1:</label>
+                                                <input type="number" name="year_one" class="form-control" id="year_one"
+                                                       t-att-value="rental.year_one" disabled="1"/>
+                                                <label for="year_two">Year 2:</label>
+                                                <input type="number" name="year_two" class="form-control" id="year_two"
+                                                       t-att-value="rental.year_two" disabled="1"/>
+                                                <label for="year_three">Year 3:</label>
+                                                <input type="number" name="year_three" class="form-control"
+                                                       id="year_three" t-att-value="rental.year_three" disabled="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="Export_destination">Export destination (manufactured goods or
+                                                merchandises):
+                                            </label>
+                                            <input type="text" name="Export_destination" class="form-control"
+                                                   t-att-value="rental.export_destination_id.name" disabled="1"
+                                                   id="Export_destination"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="Origin">Origin of imported goods (raw materials or
+                                                merchandises):
+                                            </label>
+                                            <input type="text" name="Origin" class="form-control" id="Origin"
+                                                   t-att-value="rental.origin_of_imported_goods" disabled="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div>
+                                        <p>INVESTMENT</p>
+                                        <div class="form-group">
+                                            <label for="Construction_Equipments">Construction &amp; Equipments</label>
+                                            <t t-if="rental.construction_equipments == 0.0">
+                                                <input type="number" name="Construction_Equipments" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="Construction_Equipments"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="Construction_Equipments" class="form-control"
+                                                   t-att-value="rental.construction_equipments" disabled="1"
+                                                   id="Construction_Equipments"/>
+                                            </t>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="imported_equipments">Imported equipments</label>
+                                            <t t-if="rental.imported_equipments == 0.0">
+                                                <input type="number" name="imported_equipments" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="imported_equipments"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="imported_equipments" class="form-control"
+                                                   t-att-value="rental.imported_equipments" disabled="1"
+                                                   id="imported_equipments"/>
+                                            </t>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Local_equipments">Local equipments</label>
+                                            <t t-if="rental.local_equipments == 0.0">
+                                                <input type="number" name="Local_equipments" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="Local_equipments"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="Local_equipments" class="form-control"
+                                                   t-att-value="rental.local_equipments" disabled="1"
+                                                   id="Local_equipments"/>
+                                            </t>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Means_transport">Means of transport</label>
+                                            <t t-if="rental.means_of_transport == 0.0">
+                                                <input type="number" name="Means_transport" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="Means_transport"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="Means_transport" class="form-control"
+                                                   t-att-value="rental.means_of_transport" disabled="1"
+                                                   id="Means_transport"/>
+                                            </t>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Other_costs">Other costs</label>
+                                            <t t-if="rental.other_costs == 0.0">
+                                                <input type="number" name="Other_costs" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="Other_costs"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="Other_costs" class="form-control"
+                                                   t-att-value="rental.other_costs" disabled="1"
+                                                   id="Other_costs"/>
+                                            </t>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Working_capital">Working capital</label>
+                                            <t t-if="rental.working_capital == 0.0">
+                                                <input type="number" name="Working_capital" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="Working_capital"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="Working_capital" class="form-control"
+                                                   t-att-value="rental.working_capital" disabled="1"
+                                                   id="Working_capital"/>
+                                            </t>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="TOTAL_INVESTMENT">TOTAL</label>
+                                            <t t-if="rental.total_investment == 0.0">
+                                                <input type="number" name="TOTAL_INVESTMENT" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="TOTAL_INVESTMENT"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="TOTAL_INVESTMENT" class="form-control"
+                                                   t-att-value="rental.total_investment" disabled="1"
+                                                   id="TOTAL_INVESTMENT"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p>FINANCING</p>
+                                        <div class="form-group">
+                                            <label for="Capital_finance">Capital</label>
+                                            <t t-if="rental.capital == 0.0">
+                                                <input type="number" name="Capital_finance" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="Capital_finance"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="Capital_finance" class="form-control"
+                                                   t-att-value="rental.capital" disabled="1"
+                                                   id="Capital_finance"/>
+                                            </t>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Current_partners">Current account of partners</label>
+                                            <t t-if="rental.current_account_partners == 0.0">
+                                                <input type="number" name="Current_partners" class="form-control"
+                                                   value="0" disabled="1"
+                                                   id="Current_partners"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="Current_partners" class="form-control"
+                                                   t-att-value="rental.current_account_partners" disabled="1"
+                                                   id="Current_partners"/>
+                                            </t>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Long_credit">Long term credit</label>
+                                            <input type="text" name="Long_credit" class="form-control" id="Long_credit"
+                                                   t-att-value="rental.long_term_credit" disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Middle_credit">Middle term credit</label>
+                                            <input type="text" name="Middle_credit" class="form-control"
+                                                   t-att-value="rental.middle_term_credit" disabled="1"
+                                                   id="Middle_credit"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Short_credit">Short term credit</label>
+                                            <input type="text" name="Short_credit" class="form-control"
+                                                   id="Short_credit" t-att-value="rental.short_term_credit"
+                                                   disabled="1"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="TOTAL_FINANCING">TOTAL</label>
+                                            <t t-if="rental.total_financing == 0.0">
+                                                <input type="number" name="TOTAL_FINANCING" class="form-control"
+                                                   value="0" disabled="1" id="TOTAL_FINANCING"/>
+                                            </t>
+                                            <t t-else="">
+                                                <input type="number" name="TOTAL_FINANCING" class="form-control"
+                                                   t-att-value="rental.total_financing" disabled="1"
+                                                   id="TOTAL_FINANCING"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button mt-4 mb-4" style="text-align: right;    margin-right: 3%;">
+
+
+
+                                <a href="/local/request" class="btn btn-primary"> <i class="fa fa-arrow-circle-left"/> Previous Page</a>
+                                <a
+                                   t-attf-href="/local/request/{{request_id}}"
+                                   class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-print"></i>
+                                    Print
+                                </a>
+                    <a t-if="rental.is_unlocked" t-attf-href="/local/request/{{reference}}/update"
+                                   class="btn btn-primary">Update</a>
+                            </div>
+                        </t>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="footer_custom" inherit_id="zarzis_park_website.my_footer"/>
+
+</odoo>

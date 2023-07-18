@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="request_template" name="Request Template">
+        <t t-call="website.layout">
+            <div class="oe_structure request_template">
+                <div class="container">
+                    <a class="add" t-attf-href="/" style=""> <i class="fa fa-arrow-circle-left"/> Previous Page
+                    </a>
+                    <br/>
+                    <h1>Rental Requests</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Reference</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="list_rental" t-as="rental" t-if="rental">
+                                <tr>
+                                    <td>
+                                        <a t-attf-href="request/{{rental.reference}}/check">
+                                            <t t-esc="rental.reference"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <t t-esc="rental.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="rental.phone"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="rental.email"/>
+                                    </td>
+                                    <td>
+                                        <t t-if="rental.state == 'being_processed'">
+                                            <p class="processed">Being Processed</p>
+                                        </t>
+                                        <t t-if="rental.state == 'accepted'">
+                                            <p class="accepted">Accepted</p>
+                                        </t>
+                                        <t t-if="rental.state == 'refused'">
+                                            <p class="refused">Refused</p>
+                                        </t>
+                                        <t t-if="rental.state == 'expired'">
+                                            <p class="refused">Expired</p>
+                                        </t>
+                                        <t t-if="rental.state == 'validated'">
+                                            <p class="accepted">Validated</p>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="footer_custom" inherit_id="zarzis_park_website.my_footer"/>
+</odoo>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="request_menuitem" inherit_id="portal.user_dropdown">
+        <xpath expr="//div/div" position="after">
+            <a href="/local/request" role="menuitem" class="dropdown-item ps-3"
+               id="my_request">
+                <i class="fa fa-fw fa-th me-1 small text-muted"/>
+                My requests
+            </a>
+            <div id="o_logout_divider" class="dropdown-divider"/>
+        </xpath>
+    </template>
+    <template id="list_tmp" name="Local List">
+        <t t-call="website.layout">
+            <div class="oe_structure local_list_class" style="perspective: 2000px;">
+                <form class="search_div inner-form" method="post">
+                    <div class="container">
+                        <div class="input-field">
+                            <input t-att-value="search_values" class="form-control" name="search"
+                                   id="choices-text-preset-values" type="text" placeholder="Type to search..."/>
+                            <button class="btn-search" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="filter row">
+                            <div class="active col-12" style="flex-basis: 9%;">Land
+                                <span></span>
+                            </div>
+                            <div class="col-12" style="flex-basis: 11%;">Premises
+                                <span></span>
+                            </div>
+                            <div class="col-12" style="flex-basis: 11%;">Office
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="container container_all_containers_list"
+                     style="position: relative; transition: 1s ease 0s; max-width: 1330px;overflow: hidden">
+                    <div class="container list_container list_container_land"
+                         style="max-width: 1337px; height: auto;padding-top: 1%;padding-bottom: 1%; display: flex;overflow: hidden;transition: 0.5s">
+                        <t t-foreach="allLand" t-as="list_cards">
+                            <div class="cards list">
+                                <t t-foreach="list_cards" t-as="local" t-if="local">
+                                    <a class="card" t-attf-href="/local/list/{{local.id}}">
+                                        <img class="img"
+                                             t-attf-src="/web/content/#{local.img_att.id}"
+                                             alt="local Image"
+                                             style="width: 100%;"/>
+                                        <h2 style="font-size: 27px;margin-top: 5%;">
+                                            <t t-esc="local.name"/>
+                                            <t t-if="local.state == 'not_reserved'">
+                                                <span class="green"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span class="red"/>
+                                            </t>
+                                        </h2>
+                                    </a>
+                                </t>
+                            </div>
+                        </t>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-link disabled">Previous</li>
+                                <t t-foreach="allLand" t-as="cards">
+                                    <t t-if="cards_index == 0">
+                                        <li class="page-link bullets active">
+                                            <t t-esc="cards_index + 1"/>
+                                        </li>
+                                    </t>
+                                    <t t-else="">
+                                        <li class="page-link bullets">
+                                            <t t-esc="cards_index + 1"/>
+                                        </li>
+                                    </t>
+                                </t>
+
+                                <li class="page-link">Next</li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="container list_container list_container_premises"
+                         style="max-width: 1337px; height: auto;padding-top: 1%;padding-bottom: 1%; display: flex; overflow: hidden;transition: 0.5s">
+                        <t t-foreach="allPremises" t-as="list_cards">
+                            <div class="cards list">
+                                <t t-foreach="list_cards" t-as="local" t-if="local">
+                                    <a class="card" t-attf-href="/local/list/{{local.id}}">
+                                        <img class="img"
+                                             t-attf-src="/web/content/#{local.img_att.id}"
+                                             alt="local Image"
+                                             style="width: 100%;"/>
+                                        <h2 style="font-size: 27px;text-align: center;">
+                                            <t t-esc="local.name"/>
+                                            <t t-if="local.state == 'not_reserved'">
+                                                <span class="green"></span>
+                                            </t>
+                                            <t t-else="">
+                                                <span class="red"></span>
+                                            </t>
+                                        </h2>
+                                    </a>
+                                </t>
+                            </div>
+                        </t>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-link disabled">Previous</li>
+                                <t t-foreach="allPremises" t-as="cards">
+                                    <t t-if="cards_index == 0">
+                                        <li class="page-link bullets active">
+                                            <t t-esc="cards_index + 1"/>
+                                        </li>
+                                    </t>
+                                    <t t-else="">
+                                        <li class="page-link bullets">
+                                            <t t-esc="cards_index + 1"/>
+                                        </li>
+                                    </t>
+                                </t>
+
+                                <li class="page-link">Next</li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="container list_container list_container_office"
+                         style="max-width: 1337px; height: auto;padding-top: 1%;padding-bottom: 1%; display: flex; overflow: hidden;transition: 0.5s">
+                        <t t-foreach="allOffice" t-as="list_cards">
+                            <div class="cards list">
+                                <t t-foreach="list_cards" t-as="local" t-if="local">
+                                    <a class="card" t-attf-href="/local/list/{{local.id}}">
+                                        <img class="img"
+                                             t-attf-src="/web/content/#{local.img_att.id}"
+                                             alt="local Image"
+                                             style="width: 100%;"/>
+                                        <h2 style="font-size: 27px;text-align: center;">
+                                            <t t-esc="local.name"/>
+                                            <t t-if="local.state == 'not_reserved'">
+                                                <span class="green"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span class="red"/>
+                                            </t>
+                                        </h2>
+                                    </a>
+                                </t>
+                            </div>
+                        </t>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-link disabled">Previous</li>
+                                <t t-foreach="allOffice" t-as="cards">
+                                    <t t-if="cards_index == 0">
+                                        <li class="page-link bullets active">
+                                            <t t-esc="cards_index + 1"/>
+                                        </li>
+                                    </t>
+                                    <t t-else="">
+                                        <li class="page-link bullets">
+                                            <t t-esc="cards_index + 1"/>
+                                        </li>
+                                    </t>
+                                </t>
+
+                                <li class="page-link">Next</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="container">
+                        <div class="row">
+                            <div class="info_item col-lg-3 col-12">
+                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                     width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+                                     preserveAspectRatio="xMidYMid meet">
+                                    <g style="fill: #d0d4d7;"
+                                       transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                       fill="#000000" stroke="none">
+                                        <path d="M1650 5102 c-19 -9 -45 -32 -57 -51 -21 -31 -23 -46 -23 -152 l0
+-119 790 0 790 0 0 119 c0 106 -2 121 -22 151 -13 18 -39 41 -58 51 -33 18
+-72 19 -710 19 -623 0 -678 -1 -710 -18z"/>
+                                        <path d="M1075 4473 c-37 -10 -77 -46 -96 -87 -18 -40 -19 -116 -19 -2213 l0
+-2173 2020 0 c1964 0 2022 1 2058 19 43 22 82 84 82 131 0 45 -27 96 -64 123
+l-31 22 -635 5 -635 5 -3 90 -3 89 -167 171 c-330 335 -538 606 -679 883 -114
+225 -162 422 -149 616 21 324 146 611 366 840 161 168 340 283 548 351 l82 27
+0 502 c0 485 -1 502 -20 534 -12 19 -38 41 -63 52 -41 19 -80 20 -1307 19
+-696 -1 -1274 -4 -1285 -6z m985 -335 c55 -29 81 -64 87 -119 5 -54 -19 -104
+-67 -136 -31 -22 -43 -23 -207 -23 l-174 0 -41 38 c-37 35 -42 45 -46 95 -3
+44 0 62 16 89 41 65 77 76 252 77 122 1 140 -1 180 -21z m977 -4 c90 -67 98
+-170 18 -244 -26 -24 -31 -25 -192 -28 -92 -2 -176 -1 -189 2 -65 17 -113 99
+-100 170 9 46 58 103 100 116 17 5 99 8 183 7 136 -2 154 -4 180 -23z m-956
+-647 c44 -29 74 -100 65 -151 -9 -48 -59 -103 -104 -116 -20 -5 -97 -10 -171
+-10 -116 0 -141 3 -177 21 -107 51 -113 197 -12 259 29 18 51 20 199 20 156 0
+168 -1 200 -23z m957 3 c51 -31 74 -76 69 -136 -4 -62 -28 -97 -84 -125 -38
+-18 -56 -20 -197 -17 -138 3 -158 5 -182 24 -94 70 -96 190 -5 251 32 22 44
+23 200 23 148 0 170 -2 199 -20z m-967 -642 c50 -28 84 -93 75 -146 -7 -44
+-31 -79 -76 -109 -31 -21 -44 -23 -189 -23 -129 0 -162 3 -191 18 -103 51
+-108 201 -8 262 29 18 51 20 192 20 144 0 162 -2 197 -22z m-18 -632 c43 -18
+85 -68 93 -112 9 -48 -19 -118 -59 -146 -30 -21 -44 -23 -202 -26 -156 -2
+-173 -1 -203 18 -100 62 -96 207 8 261 29 16 58 19 183 19 102 0 158 -4 180
+-14z m7 -648 c55 -29 81 -64 87 -119 5 -54 -19 -104 -67 -136 -31 -22 -43 -23
+-207 -23 l-174 0 -41 38 c-37 35 -42 45 -46 95 -3 44 0 62 16 89 41 65 77 76
+252 77 122 1 140 -1 180 -21z"/>
+                                        <path d="M3903 3096 c-452 -86 -791 -451 -844 -908 -20 -174 9 -309 111 -510
+131 -261 447 -657 737 -923 180 -166 198 -162 453 94 395 397 656 773 737
+1062 28 100 23 296 -10 421 -30 112 -86 238 -147 329 -56 82 -187 213 -269
+269 -89 60 -231 124 -331 150 -108 28 -330 36 -437 16z m480 -880 c45 -18 84
+-67 92 -116 9 -55 -25 -125 -75 -151 -31 -17 -60 -19 -313 -19 -298 0 -307 1
+-355 53 -64 68 -35 195 52 233 45 19 553 20 599 0z"/>
+                                        <path d="M82 2853 c-18 -9 -43 -30 -55 -47 l-22 -31 -3 -1328 -2 -1329 21 -38
+c12 -21 38 -47 59 -59 36 -20 51 -21 309 -21 l271 0 0 319 0 319 -124 3 c-107
+3 -128 7 -152 25 -94 70 -96 189 -4 251 30 21 45 23 156 23 l124 0 0 175 0
+175 -124 0 c-111 0 -126 2 -156 22 -48 33 -72 83 -67 137 6 55 32 90 87 119
+38 19 60 22 152 22 l108 0 0 170 0 170 -118 0 c-137 0 -173 13 -210 76 -40 68
+-19 145 52 198 24 18 45 21 152 24 l124 4 0 319 0 319 -272 0 c-231 0 -278 -3
+-306 -17z"/>
+                                    </g>
+                                </svg>
+                                <p class="sec_child locals" t-att-data-goal="len_locals">0</p>
+                                <p>Locals</p>
+                            </div>
+                            <div class="info_item col-lg-3 col-12">
+                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                     width="200.000000pt" height="200.000000pt" viewBox="0 0 200.000000 200.000000"
+                                     preserveAspectRatio="xMidYMid meet">
+
+                                    <g style="fill: #d0d4d7;"
+                                       transform="translate(0.000000,200.000000) scale(0.100000,-0.100000)"
+                                       fill="#000000" stroke="none">
+                                        <path d="M905 1936 c-215 -52 -357 -259 -323 -471 18 -113 154 -416 301 -671
+58 -100 97 -122 162 -92 49 22 271 446 344 658 48 137 45 232 -8 346 -83 178
+-287 276 -476 230z m182 -237 c83 -40 129 -137 104 -221 -30 -100 -104 -153
+-206 -146 -70 4 -121 34 -156 91 -99 164 84 360 258 276z"/>
+                                        <path d="M1392 1004 l-32 -64 140 -70 c77 -39 140 -73 139 -78 0 -4 -38 -39
+-82 -78 -106 -91 -106 -93 -28 -265 34 -73 60 -133 58 -135 -1 -1 -128 -27
+-282 -59 l-280 -57 -340 187 c-187 103 -346 193 -353 200 -10 9 -2 35 43 136
+31 68 60 127 63 131 4 4 46 15 92 23 47 8 95 18 107 20 l23 5 -32 65 c-18 36
+-37 65 -43 65 -5 0 -59 -9 -118 -19 -76 -13 -114 -24 -127 -37 -10 -11 -57
+-106 -105 -213 -83 -187 -91 -214 -68 -247 5 -6 194 -113 422 -238 l413 -227
+347 71 c190 39 358 75 374 82 27 10 44 46 39 78 -2 8 -33 81 -69 163 -36 81
+-64 149 -62 150 72 54 211 185 215 203 12 47 -19 70 -225 173 l-198 99 -31
+-64z"/>
+                                    </g>
+                                </svg>
+                                <p class="sec_child draft" t-att-data-goal="len_land">0</p>
+                                <p>Land</p>
+                            </div>
+                            <div class="info_item col-lg-3 col-12">
+                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                     width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+                                     preserveAspectRatio="xMidYMid meet">
+
+                                    <g style="fill: #d0d4d7;"
+                                       transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                       fill="#000000" stroke="none">
+                                        <path d="M2160 4375 c-353 -158 -385 -175 -388 -198 -3 -21 4 -29 30 -43 100
+-52 1785 -844 1795 -844 18 0 790 387 798 400 20 33 -12 50 -438 240 -238 106
+-648 289 -911 406 -264 118 -484 214 -490 213 -6 0 -184 -79 -396 -174z"/>
+                                        <path d="M1113 3908 c-384 -171 -413 -188 -384 -221 5 -7 420 -217 920 -467
+l911 -455 398 200 c384 193 397 201 397 229 0 28 -15 35 -908 457 -500 236
+-918 429 -930 429 -12 -1 -194 -78 -404 -172z"/>
+                                        <path d="M572 3548 c-9 -9 -12 -241 -12 -982 0 -534 4 -976 8 -983 11 -17
+1848 -833 1877 -833 17 0 26 7 30 23 3 12 4 434 3 937 l-3 915 -930 467 c-511
+257 -937 467 -945 467 -9 1 -21 -4 -28 -11z m1243 -2093 c24 -23 25 -31 25
+-135 0 -104 -1 -112 -25 -135 -15 -16 -36 -25 -55 -25 -19 0 -40 9 -55 25 -24
+23 -25 31 -25 135 0 104 1 112 25 135 15 16 36 25 55 25 19 0 40 -9 55 -25z
+m380 -120 c24 -23 25 -31 25 -135 0 -104 -1 -112 -25 -135 -15 -16 -36 -25
+-55 -25 -19 0 -40 9 -55 25 -24 23 -25 31 -25 135 0 104 1 112 25 135 15 16
+36 25 55 25 19 0 40 -9 55 -25z"/>
+                                        <path d="M3575 3092 l-930 -467 -3 -915 c-1 -503 0 -925 3 -937 4 -16 13 -23
+31 -23 29 0 1865 815 1876 833 4 7 8 449 8 983 0 1005 0 995 -39 993 -9 0
+-434 -210 -946 -467z m840 -717 l25 -24 0 -326 c0 -326 0 -327 -22 -346 -31
+-28 -594 -279 -625 -279 -13 0 -35 11 -48 25 l-25 24 0 308 c1 257 3 311 16
+328 20 27 592 314 627 315 17 0 38 -10 52 -25z m-880 -400 l25 -24 0 -326 c0
+-326 0 -327 -22 -346 -31 -28 -594 -279 -625 -279 -13 0 -35 11 -48 25 l-25
+24 0 308 c1 257 3 311 16 328 20 27 592 314 627 315 17 0 38 -10 52 -25z"/>
+                                        <path d="M4055 2078 c-88 -44 -163 -86 -167 -92 -9 -13 -11 -318 -2 -340 10
+-27 47 -18 201 50 216 95 193 64 193 263 0 93 -3 176 -6 185 -11 30 -58 15
+-219 -66z"/>
+                                        <path d="M3175 1678 c-88 -44 -163 -86 -167 -92 -9 -13 -11 -318 -2 -340 10
+-27 47 -18 201 50 216 95 193 64 193 263 0 93 -3 176 -6 185 -11 30 -58 15
+-219 -66z"/>
+                                    </g>
+                                </svg>
+                                <p class="sec_child prog" t-att-data-goal="len_premises">0</p>
+                                <p>Premises</p>
+                            </div>
+                            <div class="info_item col-lg-3 col-12">
+                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                     width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+                                     preserveAspectRatio="xMidYMid meet">
+
+                                    <g style="fill: #d0d4d7;"
+                                       transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                       fill="#000000" stroke="none">
+                                        <path d="M2188 5099 c-64 -33 -78 -76 -78 -229 l0 -131 30 -11 c145 -50 327
+-167 460 -294 195 -188 321 -414 382 -689 17 -76 21 -138 25 -407 l5 -318 149
+0 149 0 0 -150 0 -150 -299 0 -300 0 -3 458 c-4 437 -5 461 -27 539 -46 169
+-103 283 -201 407 -208 262 -544 412 -880 393 -457 -27 -836 -341 -961 -797
+-22 -82 -23 -102 -27 -542 l-3 -458 -245 0 c-226 0 -248 -2 -284 -20 -26 -13
+-47 -34 -60 -60 -20 -39 -20 -56 -20 -1280 0 -1224 0 -1241 20 -1280 23 -45
+80 -80 130 -80 50 0 107 35 130 80 20 39 20 56 20 1190 l0 1150 155 0 155 0 0
+-90 c0 -112 20 -159 80 -190 37 -19 58 -20 430 -20 l390 0 0 -150 0 -150 -245
+0 c-144 0 -266 -5 -297 -11 -172 -37 -311 -176 -347 -347 -6 -29 -11 -136 -11
+-238 0 -215 9 -248 80 -284 38 -20 57 -20 970 -20 913 0 932 0 970 20 71 36
+80 69 80 284 0 102 -5 209 -11 238 -37 172 -176 311 -347 347 -31 6 -156 11
+-297 11 l-245 0 0 150 0 150 390 0 c372 0 393 1 430 20 60 31 80 78 80 190 l0
+90 150 0 150 0 0 -300 0 -300 1055 0 1055 0 0 390 c0 372 -1 393 -20 430 -13
+26 -34 47 -60 60 -38 19 -57 20 -735 20 l-695 0 0 150 0 150 540 0 c522 0 542
+1 580 20 26 13 47 34 60 60 20 38 20 57 20 970 0 913 0 932 -20 970 -13 26
+-34 47 -60 60 -39 20 -56 20 -1272 20 -1208 -1 -1234 -1 -1270 -21z"/>
+                                        <path d="M3010 820 c0 -683 1 -702 20 -740 23 -45 80 -80 130 -80 50 0 107 35
+130 80 18 36 20 58 20 280 l0 240 755 0 755 0 0 -240 c0 -222 2 -244 20 -280
+23 -45 80 -80 130 -80 50 0 107 35 130 80 19 38 20 57 20 740 l0 700 -1055 0
+-1055 0 0 -700z"/>
+                                        <path d="M1510 450 l0 -150 -90 0 c-71 0 -99 -4 -130 -20 -45 -23 -80 -80 -80
+-130 0 -50 35 -107 80 -130 37 -19 58 -20 370 -20 312 0 333 1 370 20 45 23
+80 80 80 130 0 50 -35 107 -80 130 -31 16 -59 20 -130 20 l-90 0 0 150 0 150
+-150 0 -150 0 0 -150z"/>
+                                    </g>
+                                </svg>
+                                <p class="sec_child done" t-att-data-goal="len_office">0</p>
+                                <p>Office</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nos_partners">
+                    <h2>Our Partners</h2>
+                    <div id="content_partner1" class="content_partner owl-carousel">
+                        <t t-foreach="partner_attachment" t-as="partner">
+                            <t t-foreach="partner" t-as="att">
+                                <div class="content_item">
+                                <figure>
+                                    <img t-attf-src="/web/content/#{att.id}"
+                                         alt="Local Image"/>
+                                </figure>
+                                <div>
+                                    <p class="name">
+                                        <t t-esc="att.name"/>
+                                    </p>
+                                    <p class="desc">
+                                        <t t-esc="att.description"/>
+                                    </p>
+                                </div>
+                            </div>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="footer_custom" inherit_id="zarzis_park_website.my_footer"/>
+
+</odoo>
