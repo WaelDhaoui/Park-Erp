@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_zarzis_park_erp_rental_submission_tree" model="ir.ui.view">
+        <field name="name">zarzis.park.erp.rental.submission.tree</field>
+        <field name="model">rental.submission</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'being_processed'" decoration-success="state in ['accepted', 'validated']"
+                  decoration-danger="state in ['refused', 'expired']">
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="state" widget="badge" decoration-info="state == 'being_processed'"
+                       decoration-success="state in ['accepted', 'validated']"
+                       decoration-danger="state in ['refused', 'expired']"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_zarzis_park_erp_rental_submission_form" model="ir.ui.view">
+        <field name="name">zarzis.park.erp.rental.submission.form</field>
+        <field name="model">rental.submission</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+<!--                    <button string="Process" class="oe_highlight" name="set_to_process" type="object"/>-->
+                    <button string="Accept" class="oe_highlight" name="set_to_accept" type="object"
+                            attrs="{'invisible': [('state', '!=', 'being_processed')]}"/>
+                    <button string="Validate" class="oe_highlight" name="set_to_validate" type="object"
+                            attrs="{'invisible': [('state', '!=', 'accepted')]}"/>
+                    <button string="Refuse" class="oe_highlight" name="set_to_refuse" type="object"
+                            attrs="{'invisible': [('state', 'not in', ('being_processed', 'accepted'))]}"/>
+                    <button string="Expire" class="oe_highlight" name="set_to_expire" type="object"
+                            attrs="{'invisible': [('state', '!=', 'validated')]}"/>
+                    <button string="Send Mail" class="oe_highlight" name="send_mail" type="object"
+                            attrs="{'invisible': [('state', '!=', 'accepted'), ('state', '!=', 'validated')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,being_processed,accepted,validated,expired,refused"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="reserved_local_form" type="object" class="oe_stat_button" icon="fa-home">
+                            <span class="o_stat_text">Related Local</span>
+                        </button>
+                        <button name="edit_access_button" string="Editable" type="object" class="oe_stat_button">
+                            <div class="d-flex justify-content-evenly pt-1">
+                                <span class="o_stat_text">Unlock</span>
+                                <field name="is_unlocked" class="o_stat_value" widget="boolean_toggle"/>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Being Processed" bg_color="bg-info"
+                            attrs="{'invisible': ['|', '|', '|', ('state', '=', 'refused'), ('state', '=', 'accepted'), ('state', '=', 'validated'), ('state', '=', 'expired')]}"/>
+                    <widget name="web_ribbon" title="Accepted" bg_color="bg-success"
+                            attrs="{'invisible': ['|', '|', '|', ('state', '=', 'refused'), ('state', '=', 'being_processed'), ('state', '=', 'validated'), ('state', '=', 'expired')]}"/>
+                    <widget name="web_ribbon" title="Refused" bg_color="bg-danger"
+                            attrs="{'invisible': ['|', '|', '|', ('state', '=', 'being_processed'), ('state', '=', 'accepted'), ('state', '=', 'validated'), ('state', '=', 'expired')]}"/>
+                    <widget name="web_ribbon" title="Validated" bg_color="bg-success"
+                            attrs="{'invisible': ['|', '|', '|', ('state', '=', 'refused'), ('state', '=', 'accepted'), ('state', '=', 'being_processed'), ('state', '=', 'expired')]}"/>
+                    <widget name="web_ribbon" title="Expired" bg_color="bg-danger"
+                            attrs="{'invisible': ['|', '|', '|', ('state', '=', 'refused'), ('state', '=', 'accepted'), ('state', '=', 'validated'), ('state', '=', 'being_processed')]}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference"/>
+                        </h1>
+                    </div>
+                    <group string="Name of company to be created">
+                        <group>
+                            <field name="name" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="owner_national_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="address" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="phone" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="email" attrs="{'readonly': [('state','!=','draft')]}"/>
+
+                            <field name="submission_date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="first_refuse_date" attrs="{'invisible': [('state', '!=', 'being_processed')], 'readonly': [('state','!=','draft')]}"/>
+                            <field name="accepted_date" attrs="{'invisible': [('state', '!=', 'accepted')],'readonly': [('state','!=','draft')]}"/>
+                            <field name="second_refuse_date" attrs="{'invisible': ['&amp;', ('state', '!=', 'accepted'), ('first_refuse_date', '!=', 'False')], 'readonly': [('state','!=','draft')]}"/>
+                            <field name="send_mail_before_expire" attrs="{'invisible': ['&amp;', ('state', '!=', 'validated'), ('first_refuse_date', '!=', 'False')], 'readonly': [('state','!=','draft')]}"/>
+                            <field name="expire_date" attrs="{'invisible': ['&amp;', ('state', '!=', 'validated'), ('first_refuse_date', '!=', 'False')], 'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="first_proposal" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="second_proposal" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="third_proposal" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="activity" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="name_surname_manager" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="company_national_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="company_capital" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="currency_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+
+                    </group>
+                    <group string="Main shareholders (precise resident / non-resident)">  <!-- attrs="{'invisible': [('shareholders_ids','!=','draft')]}" -->
+                        <field name="shareholders_ids">
+                            <tree editable="bottom">
+                                <field name="name_surname" width="0.3"/>
+                                <field name="nationality_shareholders" width="0.3"/>
+                                <field name="subscription_percentage" width="0.3"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group string="Construction nature">
+                        <group>
+                            <field name="category" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                        <group attrs="{'invisible': [('category', '!=', 'land')]}">
+                            <field name="area_size" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('category', '!=', 'land')]}" string="Number of national jobs to be created">
+                        <field name="construction_nature" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        <field name="description" attrs="{'readonly': [('state','!=','draft')]}"/>
+                    </group>
+                    <group string="Investment &amp; financing program (EURO / US $ / TND)">
+                        <group>
+                            <field name="estimated_export_value" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="local_added_value" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="year_one" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="year_two" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="year_three" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="export_destination_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="origin_of_imported_goods" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Investment">
+                            <field name="construction_equipments" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="imported_equipments" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="local_equipments" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="means_of_transport" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="other_costs" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="working_capital" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="total_investment" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                        <group string="FINANCING">
+                            <field name="capital" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="current_account_partners" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="long_term_credit" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="middle_term_credit" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="short_term_credit" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="total_financing" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                    </group>
+                    <notebook attrs="{'invisible': [('state', '!=', 'refused')]}">
+                        <page name="reason_refuse" string="Refuse">
+                            <field name="reason_refuse"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!--Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_zarzis_park_erp_rental_submission_search" model="ir.ui.view">
+        <field name="name">rental.submission.search</field>
+        <field name="model">rental.submission</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_state" string="State" context="{'group_by':'state'}"/>
+                    <filter name="group_by_promoter_national" string="Type" context="{'group_by':'owner_national_id'}"/>
+                    <filter name="group_by_phone" string="Phone" context="{'group_by':'phone'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_zarzis_park_erp_rental_submission" model="ir.actions.act_window">
+        <field name="name">Rental Submission</field>
+        <field name="res_model">rental.submission</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your submission here!
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_zarzis_park_erp_partner_tree" model="ir.ui.view">
+        <field name="name">zarzis.park.erp.partner.tree</field>
+        <field name="model">zarzis.park.erp.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reference"/>
+                <field name="partner_id"/>
+                <field name="desc"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_zarzis_park_erp_partner_form" model="ir.ui.view">
+        <field name="name">zarzis.park.erp.partner.form</field>
+        <field name="model">zarzis.park.erp.partner</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="desc"/>
+                        </group>
+                        <group>
+                            <field name="logo" widget="image"/>
+                        </group>
+                    </group>
+                </sheet>
+
+                <!--Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_zarzis_park_erp_partner" model="ir.actions.act_window">
+        <field name="name">Partner</field>
+        <field name="res_model">zarzis.park.erp.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your partner here!
+            </p>
+        </field>
+    </record>
+</odoo>

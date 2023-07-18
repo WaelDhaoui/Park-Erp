@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <menuitem id="menu_zarzis_park_erp_root"
+        name="Park Erp"
+        sequence="-8"/>
+
+    <menuitem id="menu_local"
+        name="Local"
+        parent="menu_zarzis_park_erp_root"
+        action="action_zarzis_park_erp_local"
+        sequence="-10"/>
+
+    <menuitem id="menu_partner"
+        name="Partner"
+        parent="menu_zarzis_park_erp_root"
+        action="action_zarzis_park_erp_partner"
+        sequence="0"/>
+
+    <menuitem id="menu_submission"
+        name="Rental Submission"
+        parent="menu_zarzis_park_erp_root"
+        action="action_zarzis_park_erp_rental_submission"
+        sequence="1"/>
+
+
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="validate_rental_request_email_template" model="mail.template">
+            <field name="name">Validate Rental Request Email</field>
+            <field name="model_id" ref="zarzis_park_erp.model_rental_submission"/>
+            <field name="email_from"/>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="subject">Validate Rental Request</field>
+            <field name="description">Sent to customer to inform him that the request is validated</field>
+            <field name="report_template" ref="zarzis_park_erp.report_rental_submission_validate"/>
+            <field name="report_name">Application Form</field>
+            <field name="body_html" type="html">
+                <p>Dear <t t-esc="object.name" />,</p>
+                <p>I hope this email finds you well. I am writing to inform you that your request has been successfully validated.</p>
+                <p>After careful consideration and review, we are pleased to confirm that your request meets all the necessary requirements and has been approved.</p>
+                <p>Best regards,</p>
+            </field>
+        </record>
+    </data>
+</odoo>

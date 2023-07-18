@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_zarzis_park_erp_category">
+            <field name="name">Zarzis park</field>
+        </record>
+
+                <record id="zarzis_park_commercial" model="res.groups">
+            <field name="name">Commertial</field>
+            <field name="category_id" ref="zarzis_park_erp.module_zarzis_park_erp_category"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+
+        </record>
+
+        <record id="zarzis_park_administrator" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="zarzis_park_erp.module_zarzis_park_erp_category"/>
+            <field name="implied_ids" eval="[(4,ref('zarzis_park_erp.zarzis_park_commercial'))]"/>
+            <field name="users" eval="[(4,ref('base.user_admin'))]"/>
+
+        </record>
+
+    </data>
+</odoo>

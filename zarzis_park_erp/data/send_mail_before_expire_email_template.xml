@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="send_mail_before_expire_email_template" model="mail.template">
+            <field name="name">Send Mail Before Expire</field>
+            <field name="model_id" ref="zarzis_park_erp.model_rental_submission"/>
+            <field name="email_from"/>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="subject">Send Mail Before Expire</field>
+            <field name="description">Sent to customer to inform him that the request is refused</field>
+            <field name="body_html" type="html">
+                <p>Dear <t t-esc="object.name" />,</p>
+                <p>Your request is will be expired in 10 days</p>
+                <p>Best regards,</p>
+            </field>
+        </record>
+    </data>
+</odoo>

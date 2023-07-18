@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="accept_rental_request_email_template" model="mail.template">
+            <field name="name">Accept Rental Request Email</field>
+            <field name="model_id" ref="zarzis_park_erp.model_rental_submission"/>
+            <field name="email_from"/>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="subject">Accept Rental Request</field>
+            <field name="description">Sent to customer to inform him that the request is accepted</field>
+            <field name="report_template" ref="zarzis_park_erp.rental_submission_report_accept"/>
+            <field name="report_name">Application Form</field>
+            <field name="body_html" type="html">
+                <p>Dear <t t-esc="object.name" />,</p>
+                <p>I hope this email finds you well. I am writing to inform you that your request has been accepted. We have thoroughly reviewed your request, and I am pleased to inform you that we are able to accommodate your needs.</p>
+                <p>To ensure a smooth process, we have outlined the following steps and timeline. We kindly request that the client completes these steps within 15 days for timely completion of the process.</p>
+                <p>Thank you for choosing our services, and we are confident that our partnership will yield successful outcomes.</p>
+                <p>Best regards,</p>
+            </field>
+        </record>
+    </data>
+</odoo>

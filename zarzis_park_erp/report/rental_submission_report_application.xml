@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rental_submission_report_application" model="ir.actions.report">
+        <field name="name">Application Form</field>
+        <field name="model">rental.submission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">zarzis_park_erp.application_rental_submission_report_print</field>
+        <field name="report_file">zarzis_park_erp.application_rental_submission_report_print</field>
+        <field name="binding_model_id" ref="model_rental_submission"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="application_rental_submission_report_print">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="data">
+                <t t-call="web.basic_layout">
+                    <t t-call="zarzis_park_erp.application_rental_submission_report_data"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="application_rental_submission_report_data">
+
+        <div class="header" style="margin-bottom: 100px">
+            <div style="width:100%;font-family:'Almohanad', sans-serif !important; margin-bottom: 100px">
+                <table style="width: 100%; font-weight: bold" class="table table-sm">
+                    <tr>
+                        <td style="position: relative;width: 20%; text-align: center; top: 20px">
+                            <img style="width:50%" src="/zarzis_park_erp/static/description/icon.png"/>
+                        </td>
+                        <td style="width: 50%; text-align: center">
+                            <p>FORMULAIRE</p>
+                            <p>APPLICATION FORM FOR INSTALLATION IN ZARZIS PARK OF ECONOMIC ACIVITIES</p>
+                        </td>
+                        <td style="width: 30%;">
+                            <ul style="list-style: none;left: -4%; position: relative">
+                                <li style="padding-bottom: 4px;">Référence : FOR - DCP -
+                                    <span style="margin-left: 3px;" t-field="data.qweb_reference"/>
+                                </li>
+                                <li style="padding-bottom: 4px;">Version : 00</li>
+                                <li>Date :
+                                    <span t-field="data.print_day"/>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div style="width:70%;font-family:'Almohanad', sans-serif !important; margin: 0 auto; margin-top: 100px" class="text-center">
+                <div>
+                    <p style="font-weight: bold; padding-top: 20px; border-top: 2px solid black">Application
+                        form
+                        N°
+                        <span t-field="data.qweb_reference_number" style="margin: 0 5px"/>
+                        Completed in
+                        <span t-field="data.print_day" style="margin: 0 5px"/>
+                        Date
+                        <span t-field="data.print_day" style="margin: 0 5px"/>
+                        Signature
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ****************************** Page ****************************** -->
+        <div class="page" style="font-size: 18px;padding: 50px 0">
+            <div style="padding: 0 50px">
+                <p style="font-weight: bold;">Promoter Name &amp; Surname:
+                    <span style="font-weight: normal; text-transform: capitalize;" t-field="data.name"/>
+                </p>
+                <p style="font-weight: bold;">Nationality:
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.owner_national_id.name"/>
+                </p>
+                <p style="font-weight: bold;">Address:
+                    <span style="font-weight: normal; text-transform: capitalize;" t-field="data.address"/>
+                </p>
+                <p style="font-weight: bold;">Tel:<span
+                        style="font-weight: normal; text-transform: capitalize; margin-right: 10px"
+                        t-field="data.address"/>E-mail:
+                    <span style="font-weight: normal; text-transform: capitalize;" t-field="data.email"/>
+                </p>
+                <p style="font-weight: bold;">Name of company to be created: 1st Proposal:
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.first_proposal"/>
+                </p>
+                <p style="font-weight: bold;">2nd Proposal:
+                    <span style="font-weight: normal; text-transform: capitalize;margin-right: 10px"
+                          t-field="data.second_proposal"/>
+                    3rd Proposal:
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.third_proposal"/>
+                </p>
+                <p style="font-weight: bold;">Activities:
+                    <span style="font-weight: normal; text-transform: capitalize;" t-field="data.activity"/>
+                </p>
+                <p style="font-weight: bold;">Name &amp; surname of the manager:
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.name_surname_manager"/>
+                </p>
+                <p style="font-weight: bold;">Nationality:
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.company_national_id.name"/>
+                </p>
+                <p style="font-weight: bold;">Capital of the company to be created (EURO / US $ / TND):
+                    <span style="font-weight: normal; text-transform: capitalize;margin-right: 10px"
+                          t-field="data.company_capital"/>
+                    Currency:
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.currency_id.name"/>
+                </p>
+            </div>
+            <div style="padding: 0 50px;">
+                <table style="width: 100%; border: 2px solid white" class="table table-sm"
+                       t-if="data.shareholders_ids">
+                    <p style="width: 70%; border-bottom: 2px solid black;font-weight: bold; margin: 20px auto 15px">
+                        MAIN
+                        SHAREHOLDERS (PRECISE RESIDENT / NON-RESIDENT)
+                    </p>
+                    <thead style="text-align: start;border: 2px solid white">
+                        <th>Name &amp; Surname</th>
+                        <th>Activity Country</th>
+                        <th>% of subscription</th>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="data.shareholders_ids" t-as="shareholder">
+                            <tr>
+                                <td>
+                                    <span style="text-transform: capitalize;"
+                                          t-field="shareholder.name_surname"/>
+                                </td>
+                                <td>
+                                    <span style="text-transform: capitalize;"
+                                          t-field="shareholder.nationality_shareholders"/>
+                                </td>
+                                <td>
+                                    <span style="text-transform: capitalize;"
+                                          t-field="shareholder.subscription_percentage"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div style="padding: 0 50px">
+                <p style="font-weight: bold;">Requirements (in Sq m):
+                    <span style="font-weight: normal; text-transform: capitalize;" t-field="data.category"/>
+                </p>
+                <p style="font-weight: bold;" t-if="data.category == 'land'">Construction area (in Sq m):
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.area_size"/>
+                </p>
+                <p style="font-weight: bold;" t-if="data.category == 'land'">Construction nature:
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.construction_nature"/>
+                </p>
+                <p style="font-weight: bold;">NUMBER OF NATIONAL JOBS TO BE CREATED: Year 1:
+                    <span></span>
+                    <span
+                            style="font-weight: normal; text-transform: capitalize; margin-right: 10px"
+                            t-field="data.year_one"/>/ 2nd Year:
+                    <span></span>
+                    <span
+                            style="font-weight: normal; text-transform: capitalize; margin-right: 10px"
+                            t-field="data.year_two"/>/ 3rd Year:
+                    <span></span>
+                    <span style="font-weight: normal; text-transform: capitalize; margin-right: 10px"
+                          t-field="data.year_three"/>
+                </p>
+                <p style="font-weight: bold;">Estimated export value (in EURO / US$ / TND):
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.estimated_export_value"/>
+                </p>
+                <p style="font-weight: bold;">Local added value (Tunisian goods and services):
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.local_added_value"/>
+                </p>
+                <p style="font-weight: bold;">Local added value (Tunisian goods and services):
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.local_added_value"/>
+                </p>
+                <p style="font-weight: bold;">Origin of imported goods (raw materials or merchandises):
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.origin_of_imported_goods"/>
+                </p>
+                <p style="font-weight: bold;">Export destination (manufactured goods or merchandises):
+                    <span style="font-weight: normal; text-transform: capitalize;"
+                          t-field="data.export_destination_id.name"/>
+                </p>
+            </div>
+            <br/>
+            <br/>
+            <div>
+                <p style="width: 55%; border-bottom: 2px solid black;font-weight: bold; margin: 20px auto 15px">
+                    Investment &amp; financing program (EURO / US $ / TND):
+                </p>
+            </div>
+            <table style="width: 80%; border: 2px solid white; margin: 0 auto" class="table table-sm">
+                <tr>
+                    <td>
+                        <p style="width: 90%; border-bottom: 2px solid black;padding-bottom: 1%;font-weight: bold">
+                            INVESTMENT:
+                        </p>
+                    </td>
+                    <td>
+                        <p style="width: 90%; border-bottom: 2px solid black;padding-bottom: 1%;font-weight: bold">
+                            FINANCING:
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Construction &amp; Equipments:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.construction_equipments"/>
+                        </p>
+                    </td>
+                    <td width="50%">
+                        <p style="font-weight: bold">Capital:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.capital"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Imported equipments:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.imported_equipments"/>
+                        </p>
+                    </td>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Current account of partners:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.current_account_partners"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Local equipments:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.local_equipments"/>
+                        </p>
+                    </td>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Long term credit:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.long_term_credit"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Means of transport:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.means_of_transport"/>
+                        </p>
+                    </td>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Middle term credit:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.middle_term_credit"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Other costs:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.other_costs"/>
+                        </p>
+                    </td>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Short term credit:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.short_term_credit"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <p style="font-weight: bold;">Working capital:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.working_capital"/>
+                        </p>
+                    </td>
+                    <td width="50%">
+                        <p style="font-weight: bold;">TOTAL:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.total_financing"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <p style="font-weight: bold;">TOTAL:
+                            <span style="text-transform: capitalize; font-weight: normal"
+                                  t-field="data.total_investment"/>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+    </template>
+
+</odoo>

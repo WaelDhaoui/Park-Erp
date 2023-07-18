@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_zarzis_park_erp_local_tree" model="ir.ui.view">
+        <field name="name">zarzis.park.erp.local.tree</field>
+        <field name="model">zarzis.park.erp.local</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'not_reserved'" decoration-success="state == 'reserved'">
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="type_local"/>
+                <field name="currency_id"/>
+                <field name="is_published"/>
+                <field name="state" widget="badge" decoration-info="state == 'not_reserved'" decoration-success="state == 'reserved'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_zarzis_park_erp_local_form" model="ir.ui.view">
+        <field name="name">zarzis.park.erp.local.form</field>
+        <field name="model">zarzis.park.erp.local</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="active_request_form" type="object" class="oe_stat_button" icon="fa-files-o">
+                            <div class="o_stat_info">
+                                <field name="request" class="o_stat_value"/>
+                                <span class="o_stat_text">Request</span>
+                            </div>
+                        </button>
+                        <button name="website_publish_button" type="object" class="oe_stat_button" icon="fa-globe">
+                            <field name="is_published" widget="website_publish_button"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="type_local"/>
+                            <field name="area_size"/>
+                        </group>
+                        <group>
+                            <label for="price_per_metre"/>
+                            <div name="price_per_metre" class="o_row">
+                                <field name="price_per_metre"/>
+                                <field name="currency_id"/>
+                            </div>
+                            <field name="total_price"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Logo">
+                            <field name="image" widget="image"/>
+                        </page>
+                        <page string="Images">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!--Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_zarzis_park_erp_local_search" model="ir.ui.view">
+        <field name="name">zarzis.park.erp.local.search</field>
+        <field name="model">zarzis.park.erp.local</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="filter_rental" string="Ready for rental" domain="[('is_published', '=', 1)]"/>
+                <separator/>
+                <filter name="filter_not_rental" string="Not ready for rental" domain="[('is_published', '=', 0)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_state" string="State" context="{'group_by':'state'}"/>
+                    <filter name="group_by_type" string="Type" context="{'group_by':'type_local'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_zarzis_park_erp_local" model="ir.actions.act_window">
+        <field name="name">Local</field>
+        <field name="res_model">zarzis.park.erp.local</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your local here!
+            </p>
+        </field>
+    </record>
+</odoo>
