@@ -1,0 +1,211 @@
+.patient_details_class h2 {
+    text-transform: uppercase;
+    position: relative;
+    width: fit-content;
+    margin: 0% auto;
+    padding: 1%;
+    box-shadow: 0 0 0px 2px #030007;
+    margin-bottom: 1%;
+}
+.patient_details_class h2:before {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    left: -19%;
+    top: 45%;
+    background-color: #2196f3;
+}
+.patient_details_class h2:after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    right: -19%;
+    top: 45%;
+    background-color: #2196f3;
+}
+
+.patient_details_class ul.detail_content {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0;
+    position: relative;
+}
+.patient_details_class ul.detail_content li {
+    flex-basis: 22%;
+    padding: 1% 2%;
+    background-color: #eee;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.patient_details_class .status_list {
+    margin: auto;
+    margin-bottom: 2%;
+    background-color: #eee;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    width: fit-content;
+}
+
+.patient_details_class .status_list li {
+    list-style: none;
+    padding: 1% 0;
+    background-color: #eee;
+    position: relative;
+    width: 223px;
+    font-size: larger;
+    text-align: center;
+}
+.patient_details_class .status_list li.active {
+    background-color: #bdbdbd;
+    font-weight: 600;
+}
+
+.patient_details_class .content {
+    width: 80%;
+    height: 620px;
+    display: flex;
+    overflow: hidden;
+    margin: auto;
+    margin-bottom: 3%;
+    background-color: #eee;
+    position: relative;
+}
+.patient_details_class .img {
+    width: 100%;
+    padding: 4%;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 0;
+}
+.patient_details_class img.active {
+    z-index: 1;
+}
+.patient_details_class .first_bottom {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    font-size: xx-large;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 21%;
+}
+.patient_details_class .last_bottom {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    font-size: xx-large;
+    position: absolute;
+    bottom: 45%;
+    left: 75%;
+}
+
+.patient_details_class .thumbs_container {
+    height: 100px;
+    width: 678px;
+    position: relative;
+    top: 88.2%;
+    margin: 0 auto;
+    padding: 0;
+    z-index: 100;
+    overflow: auto;
+    overflow-x: hidden
+}
+.patient_details_class .thumbs_container .navThumbs {
+    z-index: 500;
+    z-index: 100;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.patient_details_class .thumbs_container .navThumbs li {
+    transition: 0.5s;
+}
+.patient_details_class #update,
+.patient_details_class a.add {
+    background-color: #5D8DA8;
+    color: white;
+    padding: 1% 2%;
+    border-radius: 7px;
+    margin-left: 2%;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 576px) {
+    .swiper {
+      height: 225px !important;
+    }
+}
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+.mySwiper2 {
+  width: 100%;
+}
+@media (max-width: 576px) {
+    .mySwiper2 {
+        width: 100%;
+    }
+}
+.mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+@media (max-width: 576px) {
+    .mySwiper {
+        height: 95px !important;
+        width: 100% !important;
+    }
+}
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+@media (max-width: 576px) {
+    .patient_details_class .container > div:last-child {
+        justify-content: flex-end;
+        left: auto !important;
+    }
+}

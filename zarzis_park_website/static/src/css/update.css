@@ -1,0 +1,77 @@
+.patient_update_tmp h2 {
+    text-transform: uppercase;
+    position: relative;
+    width: fit-content;
+    margin: 0% auto;
+    padding: 1%;
+    box-shadow: 0 0 0px 2px #030007;
+}
+.patient_update_tmp h2:before {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    left: -19%;
+    top: 45%;
+    background-color: #2196f3;
+}
+.patient_update_tmp h2:after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    right: -19%;
+    top: 45%;
+    background-color: #2196f3;
+}
+
+.patient_update_tmp .status_list {
+    margin: auto;
+    margin-bottom: 2%;
+    background-color: #eee;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    width: fit-content;
+}
+
+.patient_update_tmp .status_list li {
+    list-style: none;
+    padding: 1% 0;
+    background-color: #eee;
+    position: relative;
+    width: 223px;
+    font-size: larger;
+    text-align: center;
+}
+.patient_update_tmp .status_list li.active {
+    background-color: #bdbdbd;
+    font-weight: 600;
+}
+
+.patient_update_tmp form#my_form_update {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.patient_update_tmp form#my_form_update input,
+.patient_update_tmp form#my_form_update select {
+    display: block;
+    width: 40%;
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    caret-color: #35979c;
+}
+.patient_update_tmp form#my_form_update input:last-child {
+    padding: 20px;
+    color: white;
+    background-color: #35979c;
+    border: none;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 2%;
+}
+

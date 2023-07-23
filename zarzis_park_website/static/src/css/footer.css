@@ -1,0 +1,122 @@
+footer {
+    color: white;
+    fill: white;
+    overflow: hidden;
+    background-color: #222 !important
+}
+footer .list1 {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+@media (max-width: 576px) {
+  footer .list1 {
+    flex-direction: column;
+  }
+}
+footer .list1 div {
+    flex: 1;
+    padding: 8%;
+    background-color: #1e1e1e;
+    border-right: 1px solid black;
+    transition: .5s;
+    text-align: center;
+}
+@media (max-width: 576px) {
+  footer .list1 div {
+    padding: 8%;
+  }
+}
+footer .list1 div:hover {
+    background-color: #222;
+    transform: scale(1.1);
+}
+footer .list1 div svg {
+    display: block;
+    margin: auto;
+    width: 50px;
+    padding: 5%;
+    border-radius: 50%;
+    background-color: white;
+    fill: #222 !important;
+    height: 50px;
+    margin-bottom: 4%;
+}
+@media (max-width: 576px) {
+  footer .list1 div svg {
+    padding: 8px;
+  }
+}
+footer .list2 {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    align-items: center;
+}
+@media (max-width: 576px) {
+  footer .list2 {
+    justify-content: center;
+    padding-top: 20px
+  }
+}
+footer .list2 div,
+footer .list2 ul {
+    list-style: none;
+    padding: 0;
+    margin: 2% 0;
+}
+@media (max-width: 576px) {
+  footer .list2 div,
+  footer .list2 ul {
+    text-align: center;
+  }
+}
+footer .list2 div h3 {
+    font-size: x-large;
+    margin-bottom: 12px;
+}
+footer .list2 div li {
+    color: #919191;
+    font-size: 15px;
+    margin-bottom: 2%;
+    cursor: pointer;
+}
+footer .list2 .logo_footer {
+    height: 103px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 576px) {
+  footer .list2 .logo_footer {
+    height: 70px;
+    width: 70px
+  }
+}
+.social_media ul {
+    display: flex;
+    align-items: center;
+}
+@media (max-width: 576px) {
+  .social_media ul {
+    justify-content: center;
+  }
+}
+.social_media ul li {
+    background-color: white;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+    margin-right: 5%;
+}
+.social_media li a {
+    color: #222 !important;
+}

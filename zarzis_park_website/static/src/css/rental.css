@@ -1,0 +1,130 @@
+.update_request_template form,
+.check_template form,
+.rental_template form {
+    margin-top: 3%;
+}
+.update_request_template p,
+.check_template p,
+.rental_template p {
+    position: relative;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 1%;
+}
+.update_request_template form > div > div,
+.check_template form > div > div,
+.rental_template form > div > div {
+    display: flex;
+}
+.update_request_template form .table,
+.check_template form .table,
+.rental_template form .table {
+    display: block
+}
+.update_request_template table,
+.check_template table,
+.rental_template table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 97%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.update_request_template table thead tr,
+.check_template table thead tr,
+.rental_template table thead tr {
+    background-color: #ddd;
+    color: #000;
+    text-align: left;
+}
+.update_request_template table th,
+.rental_template table th,
+.check_template table th,
+.update_request_template table td,
+.check_template table td,
+.rental_template table td {
+    padding: 12px 15px;
+}
+.update_request_template table tbody tr,
+.check_template table tbody tr,
+.rental_template table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+.update_request_template table tbody tr:nth-of-type(even),
+.check_template table tbody tr:nth-of-type(even),
+.rental_template table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+.update_request_template table tbody tr:last-of-type,
+.check_template table tbody tr:last-of-type,
+.rental_template table tbody tr:last-of-type {
+    border-bottom: 2px solid #ddd;
+}
+.update_request_template form > div > div > div,
+.check_template form > div > div > div,
+.rental_template form > div > div > div {
+    flex: 1;
+    margin-right: 3%;
+}
+.update_request_template form .form-group,
+.check_template form .form-group,
+.rental_template form .form-group {
+    margin-bottom: 3%;
+}
+@media (max-width: 576px) {
+    .update_request_template form .years_width_small_screen,
+    .check_template form .years_width_small_screen,
+    .rental_template form .years_width_small_screen {
+        width: 213%;
+    }
+}
+
+.update_request_template form label,
+.check_template form label,
+.rental_template form label {
+    margin-bottom: 1%;
+}
+.update_request_template form .button input,
+.check_template form .button input,
+.rental_template form .button input,
+.rental_template form .button a,
+.request_template .container > a {
+    background-color: #5D8DA8;
+    color: white;
+    padding: 1% 2%;
+    border-radius: 7px;
+    border: none;
+    margin-bottom: 2%;
+}
+
+.update_request_template .nb_nat_jobs,
+.check_template .nb_nat_jobs,
+.rental_template .nb_nat_jobs {
+    display: flex;
+    align-items: center;
+}
+.update_request_template .nb_nat_jobs label,
+.check_template .nb_nat_jobs label,
+.rental_template .nb_nat_jobs label {
+    flex-basis: 39%;
+}
+.update_request_template .nb_nat_jobs input,
+.check_template .nb_nat_jobs input,
+.rental_template .nb_nat_jobs input {
+    flex-basis: 46%;
+    margin-right: 8%;
+    padding: 0.2% 0% !important;
+    padding-left: 1% !important;
+}
+@media (max-width: 576px) {
+    .update_request_template .nb_nat_jobs input,
+    .check_template .nb_nat_jobs input,
+    .rental_template .nb_nat_jobs input {
+        flex-basis: 30%;
+        margin-right: 3%;
+    }
+}
+.btn-primary{
+    background-color: #5D8DA8;
+
+}

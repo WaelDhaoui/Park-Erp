@@ -1,0 +1,349 @@
+html { height: auto !important; overflow:auto; }
+body { height: 100%; }
+.local_list_class a#add {
+    position: relative;
+    padding: 1%;
+    width: fit-content;
+    border: 2px solid #030007;
+    font-size: 18px;
+    line-height: 14px;
+    letter-spacing: 0.053em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1%;
+    left: 96%;
+}
+.local_list_class .filter {
+    color: #ddd;
+    position: relative;
+    display: flex;
+    padding: 0;
+    margin-top: 1%;
+    justify-content: center;
+}
+@media (max-width: 576px) {
+    .local_list_class .filter {
+        margin-top: 3%;
+    }
+}
+.local_list_class .filter div {
+    cursor: pointer;
+    font-size: larger;
+    font-weight: 600;
+    position: relative;
+    margin: auto 1%;
+}
+@media (max-width: 576px) {
+    .local_list_class .filter div {
+        text-align: center;
+        margin-bottom: 3%;
+        padding-bottom: 1%;
+    }
+}
+.local_list_class .filter div:before {
+    content: '';
+    height: 1px;
+    display: block;
+    width: 0%;
+    position: relative;
+    background-color: white;
+    top: 31px;
+    transition: 0.8s;
+}
+@media (max-width: 576px) {
+    .local_list_class .filter div:before {
+        top: 29px;
+    }
+}
+.local_list_class .filter > div:hover:before,
+.local_list_class .filter > div.active:before {
+    width: 88%
+}
+.local_list_class .filter > div:nth-child(2):hover:before,
+.local_list_class .filter > div.active:nth-child(2):before {
+    width: 104%
+}
+.local_list_class .filter > div:last-child:hover:before,
+.local_list_class .filter > div.active:last-child:before {
+    width: 87%
+}
+.local_list_class .filter div.active,
+.local_list_class .filter div:hover {
+    color: white;
+}
+.local_list_class .filter div span {
+    position: relative;
+    opacity: 0.6;
+    left: 0;
+}
+.local_list_class .filter div.active span,
+.local_list_class .filter div:hover span {
+    color: white;
+    opacity: 1;
+}
+
+.local_list_class .list_container {
+    box-sizing: content-box;
+    padding-bottom: 7% !important;
+    max-width: 1280px !important;
+    position: absolute !important;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    top: 0;
+    transition: 0.5s
+}
+@media (max-width: 576px) {
+    .local_list_class .list_container {
+        max-width: 351px !important;
+    }
+}
+.local_list_class .list_container.active {
+    transform: rotateY(0deg)
+}
+.local_list_class .cards {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(3,280px);
+    grid-gap: 3%;
+    margin-bottom: 3%;
+    width: 1255px;
+    position: absolute;
+    transition: 0.5s
+}
+@media (max-width: 576px) {
+    .local_list_class .cards {
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(3, 180px) !important;
+        grid-gap: 1%;
+        margin-bottom: 2%;
+        width: 332px;
+        left: 3px !important;
+    }
+}
+.local_list_class .cards .card {
+    box-shadow: 0 0 10px 6px #ddd;
+    height: 278px;
+    display: flex;
+    align-items: center;
+    width: 18rem;
+    transition: 0.5s;
+    border-radius: 23px;
+}
+@media (max-width: 576px) {
+    .local_list_class .cards .card {
+        height: 130px;
+        width: 106px;
+        border-radius: 10px;
+    }
+}
+.local_list_class .cards:hover .card {
+  opacity: 0.3;
+}
+.local_list_class .cards:hover .card:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  opacity: 1;
+}
+@media (max-width: 576px) {
+    .local_list_class .cards .card h2 {
+        font-size: 15px !important;
+    }
+}
+.local_list_class .cards .card .green {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: green;
+    display: inline-block;
+}
+.local_list_class .cards .card .red {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    display: inline-block;
+}
+@media (max-width: 576px) {
+    .local_list_class .cards .card .green,
+    .local_list_class .cards .card .red {
+        width: 10px;
+        height: 10px;
+    }
+}
+.local_list_class img.img {
+    height: 75%;
+}
+.local_list_class .cards + nav {
+    position: relative;
+    margin: 0 auto
+}
+.local_list_class .cards + nav li.bullets {
+    font-weight: 600;
+    font-size: 22px;
+    padding: 3px 12px 0px;
+    cursor: pointer;
+    display: list-item;
+}
+.local_list_class .cards + nav li.active {
+    background-color: #1089fe;
+    color: white
+}
+.local_list_class .cards + nav li.page-link {
+    cursor: pointer
+}
+.local_list_class .cards + nav li.disabled:hover {
+    background-color: white;
+    color: #1089fe;
+    cursor: default
+}
+.local_list_class .info {
+    background-color: #002d74;
+}
+.local_list_class .info ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 4% 0;
+}
+@media (max-width: 576px) {
+    .local_list_class .info .row {
+        padding-top: 10px
+    }
+}
+.local_list_class .info .info_item {
+    color: #d0d4d7;
+    text-align: center;
+    font-size: x-large;
+    transition: 0.5s;
+    cursor: pointer;
+    padding: 28px 0;
+}
+.local_list_class .info .info_item:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+.local_list_class .info .info_item svg {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+}
+.local_list_class .info .info_item object svg g {
+    fill: #d0d4d7;
+}
+.local_list_class .info .info_item:hover svg,
+.local_list_class .info .info_item:hover object path {
+    fill: white !important
+}
+.local_list_class .info .info_item p {
+    margin: auto;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: xx-large;
+    position: relative;
+}
+.local_list_class .info .info_item p.sec_child:before {
+    content: "";
+    position: absolute;
+    width: 66px;
+    height: 1px;
+    background-color: #d0d4d7;
+    top: 100%;
+    left: 40%;
+}
+@media (max-width: 576px) {
+    .local_list_class .info .info_item p.sec_child:before {
+        left: 40% !important
+    }
+}
+.local_list_class .info .info_item p:last-child {
+    border: none;
+    font-size: x-large;
+}
+@media (max-width: 576px) {
+    .local_list_class .info .info_item p:last-child {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+}
+.local_list_class .nos_partners {
+    padding: 1%;
+    min-height: 400px;
+}
+@media (max-width: 576px) {
+    .local_list_class .nos_partners {
+        padding: 7%;
+        padding-bottom: 2%;
+        min-height: 363px;
+    }
+}
+.local_list_class .nos_partners h2 {
+    text-align: center;
+    margin-bottom: 4%;
+}
+@media (max-width: 576px) {
+    .local_list_class .nos_partners h2 {
+        margin-bottom: 8%;
+    }
+}
+.slick-prev:before,
+.slick-next:before {
+    color: black
+}
+.local_list_class .nos_partners .content_partner {
+    width: 87vw;
+    transition: 0.5s;
+    padding: 0% 0 0 1%;
+    margin: auto;
+}
+.local_list_class .nos_partners .content_partner .owl-stage-outer {
+  height: 250px;
+}
+.local_list_class .nos_partners .content_item {
+    width: 300px !important;
+    margin-right: 4%;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 0 #ddd;
+    padding: 1% 2%;
+    border-radius: 10px
+}
+.local_list_class .nos_partners .content_item figure {
+    width: 250px;
+    height: 71px;
+    background-color: white;
+    position: relative;
+    z-index: 8;
+}
+.local_list_class .nos_partners .content_item img {
+    width: 100%;
+    height: auto;
+    z-index: 5;
+    position: relative;
+}
+.local_list_class .nos_partners .content_item p {
+    position: relative;
+    margin-bottom: 3px;
+}
+.local_list_class .nos_partners .content_item p.desc {
+    height: 100px;
+    overflow-y: auto;
+}
+.local_list_class .nos_partners .content_item div {
+    position: relative;
+    top: -76px;
+    transition: 0.5s;
+    opacity: 0
+}
+.local_list_class .nos_partners .content_item:hover {
+    height: 240px;
+    box-shadow: 0 0 12px #ddd;
+}
+.local_list_class .nos_partners .content_item:hover div {
+    top: 0;
+    opacity: 1
+}
+.local_list_class .nos_partners .content_item .name {
+    font-size: x-large;
+    font-weight: bold;
+}

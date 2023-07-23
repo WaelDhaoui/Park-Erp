@@ -1,0 +1,89 @@
+.request_template h1 {
+    text-align: center
+}
+.request_template .container > a {
+    display: block;
+    margin-top: 1%;
+    width: fit-content;
+    margin-left: auto;
+}
+@media (max-width: 576px) {
+    .request_template .container > a {
+        margin-top: 5%;
+        margin-left: auto;
+        padding: 2% 4%;
+        font-size: 12px;
+    }
+}
+.request_template table {
+    border-collapse: collapse;
+    margin: 25px auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 900px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 576px) {
+    .request_template table {
+        min-width: 300px;
+    }
+}
+.request_template table thead tr {
+    background-color: #5D8DA8;
+    color: #ffffff;
+    text-align: left;
+}
+.request_template table th,
+.request_template table td {
+    padding: 12px 15px;
+    text-align: center
+}
+@media (max-width: 576px) {
+    .request_template table th,
+    .request_template table td {
+        padding: 4px 6px;
+        font-size: 12px;
+    }
+}
+@media (max-width: 576px) {
+    .request_template table tr > th:nth-child(4),
+    .request_template table tr > td:nth-child(4) {
+        display: none
+    }
+}
+.request_template table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.request_template table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.request_template table tbody tr:last-of-type {
+    border-bottom: 2px solid #5D8DA8;
+}
+.request_template table p {
+    width: fit-content;
+    color: white;
+    padding: 2% 4%;
+    border-radius: 16px;
+    font-weight: 700;
+    margin: 0;
+    text-align: center
+}
+.request_template table .processed {
+    background-color: RGBA(23, 162, 184, var(--bg-opacity, 1)) !important;
+
+}
+@media (max-width: 576px) {
+    .request_template table .processed {
+        padding: 5% 5px;
+        font-size: 10px;
+    }
+}
+.request_template table .accepted {
+    background-color: RGBA(40, 167, 69, var(--bg-opacity, 1)) !important;
+}
+.request_template table .refused {
+    background-color: RGBA(220, 53, 69, var(--bg-opacity, 1)) !important;
+}
