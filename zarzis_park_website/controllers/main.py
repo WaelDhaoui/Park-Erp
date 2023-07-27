@@ -35,24 +35,7 @@ class Main(http.Controller):
 
         # Prepare the container for the locals based on their status
         allLocals = self.prepare_list_container_status(all_Local)
-        for local in allLocals:
-            if local:
-                for rec in local:
-                    if rec:
-                        print(rec.img_att.id)
-#     for rec in local:
-            #         print(rec.img_att)
-
         allLand = self.prepare_list_container_status(land_local)
-        # land_attachment = []
-        #
-        # for land in allLand:
-        #     logo = request.env['ir.attachment'].sudo().search([
-        #             ('res_model', '=', 'zarzis.park.erp.local'),
-        #             ('name', '=', land.name)
-        #     ])
-        #     land_attachment.append(logo)
-
         allPremises = self.prepare_list_container_status(premises_local)
         allOffice = self.prepare_list_container_status(office_local)
 

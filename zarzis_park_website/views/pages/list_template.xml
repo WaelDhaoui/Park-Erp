@@ -46,7 +46,7 @@
                                 <t t-foreach="list_cards" t-as="local" t-if="local">
                                     <a class="card" t-attf-href="/local/list/{{local.id}}">
                                         <img class="img"
-                                             t-attf-src="/web/content/#{local.img_att.id}"
+                                             t-attf-src="data:image/png;base64, {{local.image}}"
                                              alt="local Image"
                                              style="width: 100%;"/>
                                         <h2 style="font-size: 27px;margin-top: 5%;">
@@ -89,7 +89,7 @@
                                 <t t-foreach="list_cards" t-as="local" t-if="local">
                                     <a class="card" t-attf-href="/local/list/{{local.id}}">
                                         <img class="img"
-                                             t-attf-src="/web/content/#{local.img_att.id}"
+                                             t-attf-src="data:image/png;base64, {{local.image}}"
                                              alt="local Image"
                                              style="width: 100%;"/>
                                         <h2 style="font-size: 27px;text-align: center;">
@@ -132,7 +132,7 @@
                                 <t t-foreach="list_cards" t-as="local" t-if="local">
                                     <a class="card" t-attf-href="/local/list/{{local.id}}">
                                         <img class="img"
-                                             t-attf-src="/web/content/#{local.img_att.id}"
+                                             t-attf-src="data:image/png;base64, {{local.image}}"
                                              alt="local Image"
                                              style="width: 100%;"/>
                                         <h2 style="font-size: 27px;text-align: center;">
