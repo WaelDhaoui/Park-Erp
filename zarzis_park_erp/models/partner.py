@@ -15,23 +15,23 @@ class Partner(models.Model):
     desc = fields.Char(string="Description", required=True)
     logo = fields.Binary(string="Logo")
 
-    @api.onchange('logo')
-    def button_add_attachments(self):
-        u"""Add attachment to any object."""
-        context = self.env.context or {}
-        attachment_obj = self.env['ir.attachment']
-        for wiz in self:
-            if wiz.logo:
-                field_name = context.get('field_name', 'logo')
-                print("field_name",field_name)
-
-                values = {'name': wiz.partner_id.name,
-                          'res_id': wiz.id,
-                          'res_model': 'zarzis.park.erp.partner',
-                          'description': wiz.desc,
-                          'public':True,
-                          'datas': wiz.logo}
-                attachment = attachment_obj.create(values)
+    # @api.onchange('logo')
+    # def button_add_attachments(self):
+    #     u"""Add attachment to any object."""
+    #     context = self.env.context or {}
+    #     attachment_obj = self.env['ir.attachment']
+    #     for wiz in self:
+    #         if wiz.logo:
+    #             field_name = context.get('field_name', 'logo')
+    #             print("field_name",field_name)
+    #
+    #             values = {'name': wiz.partner_id.name,
+    #                       'res_id': wiz.id,
+    #                       'res_model': 'zarzis.park.erp.partner',
+    #                       'description': wiz.desc,
+    #                       'public':True,
+    #                       'datas': wiz.logo}
+    #             attachment = attachment_obj.create(values)
     # Sequence
     @api.model
     def create(self, vals):

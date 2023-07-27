@@ -47,23 +47,6 @@ class Local(models.Model):
     total_price = fields.Monetary(string="Total Price:", compute="_compute_total_price")
 
     image = fields.Binary(string="Image", default=_default_image, attachment=True)
-    img_att = fields.Many2one('ir.attachment', compute="_compute_image_attachment")
-
-    @api.depends('image')
-    def _compute_image_attachment(self):
-        context = self.env.context or {}
-        attachment_obj = self.env['ir.attachment']
-        for wiz in self:
-            if wiz.image:
-                field_name = context.get('field_name', 'logo')
-                values = {'name': wiz.name,
-                          'res_id': wiz.id,
-                          'res_model': 'zarzis.park.erp.local',
-                          'public':True,
-                          'datas': wiz.image}
-                attachment = attachment_obj.create(values)
-                for record in self:
-                    record.img_att = attachment
 
     attachment_ids = fields.Many2many('ir.attachment', string='Images',
                                       default=lambda self: self._default_attachments())
